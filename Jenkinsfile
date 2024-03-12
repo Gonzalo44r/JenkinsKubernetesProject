@@ -9,16 +9,18 @@ pipeline {
             steps{
                 try {
                     sh "docker image rm ${IMAGE_NAME}"
+                } finally {
+                    sh "docker build . -t proyecto-final"
                 }
-                sh "docker build . -t proyecto-final"
             }
         }
         stage('Docker Run (No-Kubernetes)'){
                 try {
                     sh "docker stop ${CONTAINER_NAME}"
                     sh "docker rm ${CONTAINER_NAME}"
+                } finally {
+                    sh "docker run -d -p 9080:80 --name ${CONTAINER_NAME} ${IMAGE_NAME}"
                 }
-                sh "docker run -d -p 9080:80 --name ${CONTAINER_NAME} ${IMAGE_NAME}"
         }
     }
 }
