@@ -6,8 +6,8 @@ pipeline {
     }
     stages{
         stage('Build Docker Image'){
-            script {
-                steps{
+            steps{
+                script {
                     try {
                         sh "docker image rm ${IMAGE_NAME}"
                     } catch(err){} finally {
@@ -17,8 +17,8 @@ pipeline {
             }
         }
         stage('Docker Run (No-Kubernetes)'){
-            script {
-                steps{
+            steps {
+                script{
                     try {
                         sh "docker stop ${CONTAINER_NAME}"
                         sh "docker rm ${CONTAINER_NAME}"
