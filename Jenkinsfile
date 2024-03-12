@@ -16,18 +16,25 @@ pipeline {
                 }
             }
         }
-        stage('Docker Run (No-Kubernetes)'){
+        stage('Kubernetes Configuration') {
             steps {
-                script{
-                    try {
-                        sh "docker stop ${CONTAINER_NAME}"
-                        sh "docker rm ${CONTAINER_NAME}"
-                    } catch(err){} finally {
-                        sh "docker run -d -p 9080:80 --name ${CONTAINER_NAME} ${IMAGE_NAME}"
-                    }
+                script {
+                    sh "kubectl apply -f k8s-config/*.yaml"
                 }
             }
         }
+        // stage('Kubernetes Deploy'){
+        //     steps {
+        //         script{
+        //             try {
+        //                 sh "docker stop ${CONTAINER_NAME}"
+        //                 sh "docker rm ${CONTAINER_NAME}"
+        //             } catch(err){} finally {
+        //                 // sh "docker run -d -p 9080:80 --name ${CONTAINER_NAME} ${IMAGE_NAME}"
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
 
