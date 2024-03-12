@@ -15,12 +15,14 @@ pipeline {
             }
         }
         stage('Docker Run (No-Kubernetes)'){
+            steps{
                 try {
                     sh "docker stop ${CONTAINER_NAME}"
                     sh "docker rm ${CONTAINER_NAME}"
                 } catch(err){} finally {
                     sh "docker run -d -p 9080:80 --name ${CONTAINER_NAME} ${IMAGE_NAME}"
                 }
+            }
         }
     }
 }
