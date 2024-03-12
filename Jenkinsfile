@@ -9,7 +9,7 @@ pipeline {
             steps{
                 try {
                     sh "docker image rm ${IMAGE_NAME}"
-                } catch(){} finally {
+                } catch(err){} finally {
                     sh "docker build . -t proyecto-final"
                 }
             }
@@ -18,7 +18,7 @@ pipeline {
                 try {
                     sh "docker stop ${CONTAINER_NAME}"
                     sh "docker rm ${CONTAINER_NAME}"
-                } catch(){} finally {
+                } catch(err){} zfinally {
                     sh "docker run -d -p 9080:80 --name ${CONTAINER_NAME} ${IMAGE_NAME}"
                 }
         }
