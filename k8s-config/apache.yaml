@@ -5,7 +5,7 @@ metadata:
   labels:
     app: apache
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: apache
@@ -15,7 +15,7 @@ spec:
         app: apache
     spec:
       containers:
-      - name: apache
+      - name: apache-container
         image: httpd:latest
         ports:
         - containerPort: 80
@@ -23,7 +23,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: apache
+  name: apache-service
 spec:
   type: NodePort
   selector:
