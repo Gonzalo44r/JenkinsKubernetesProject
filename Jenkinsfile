@@ -18,7 +18,7 @@ pipeline {
                 try {
                     sh "docker stop ${CONTAINER_NAME}"
                     sh "docker rm ${CONTAINER_NAME}"
-                } catch(err){} zfinally {
+                } catch(err){} finally {
                     sh "docker run -d -p 9080:80 --name ${CONTAINER_NAME} ${IMAGE_NAME}"
                 }
         }
