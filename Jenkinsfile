@@ -19,7 +19,7 @@ pipeline {
         stage('Kubernetes Configuration') {
             steps {
                 script {
-                    sh "kubectl apply -f k8s-config/*.yaml"
+                    sh "kubectl replace -f k8s-config/*.yaml"
                 }
             }
         }
